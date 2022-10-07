@@ -14,7 +14,7 @@ class SnippetController extends Controller
      */
     public function index()
     {
-        //
+        return view('snippets.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class SnippetController extends Controller
      */
     public function create(Request $request)
     {
-        //
+        return view('snippets.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class SnippetController extends Controller
      */
     public function show(Snippet $snippet)
     {
-        //
+        return view('snippets.show', ['snippet' => $snippet]);
     }
 
     /**
@@ -57,7 +57,7 @@ class SnippetController extends Controller
      */
     public function edit(Snippet $snippet)
     {
-        //
+        return view('snippets.edit', ['snippet' => $snippet]);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SnippetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,7 @@ Route::get('/', function (Request $request) {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('snippets', SnippetController::class);
 
 require __DIR__ . '/auth.php';
