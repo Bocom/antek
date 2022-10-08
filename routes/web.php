@@ -27,6 +27,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('snippets', SnippetController::class);
+Route::resource('snippets', SnippetController::class)->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

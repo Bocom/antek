@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Snippet;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class SnippetController extends Controller
@@ -14,7 +15,7 @@ class SnippetController extends Controller
      */
     public function index()
     {
-        return view('snippets.index');
+        return view('snippets.index', ['snippets' => Snippet::all()]);
     }
 
     /**
@@ -35,7 +36,26 @@ class SnippetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'title' => ['required', 'unique:snippets'],
+            'content' => ['required'],
+        ]);
+
+        $attributes['author_id'] = $request->user()->id;
+
+        $snippet = Snippet::create($attributes);
+
+        if ($request->has('tags')) {
+            $tags = str($request->input('tags'))->explode('|');
+            foreach ($tags as $name) {
+                $tag = Tag::firstOrCreate([
+                    'name' => $name,
+                ]);
+                $snippet->tags()->attach($tag);
+            }
+        }
+
+        return redirect()->route('snippets.show', ['snippet' => $snippet]);
     }
 
     /**

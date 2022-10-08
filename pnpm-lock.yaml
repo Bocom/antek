@@ -23,7 +23,7 @@ devDependencies:
   laravel-vite-plugin: 0.6.1_vite@3.1.6
   lodash: 4.17.21
   postcss: 8.4.17
-  tailwindcss: 3.1.8
+  tailwindcss: 3.1.8_postcss@8.4.17
   vite: 3.1.6
 
 packages:
@@ -80,7 +80,7 @@ packages:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.1.8
+      tailwindcss: 3.1.8_postcss@8.4.17
     dev: true
 
   /@vue/reactivity/3.1.5:
@@ -833,10 +833,12 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.1.8:
+  /tailwindcss/3.1.8_postcss@8.4.17:
     resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3

@@ -11,6 +11,10 @@ class Tag extends Model
     use HasFactory;
     use HasUuids;
 
+    public $fillable = [
+        'name',
+    ];
+
     public function snippets()
     {
         return $this->belongsToMany(Snippet::class);

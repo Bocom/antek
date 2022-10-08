@@ -1,6 +1,6 @@
-@props(['name', 'options' => [], 'selected'])
+@props(['name', 'options' => [], 'selected', 'value' => null])
 
-<x-text-input type="text" {{ $attributes->merge(['name' => $name]) }} />
+<x-text-input type="text" {{ $attributes->merge(['name' => $name]) }} :$value />
 
 @pushOnce('scripts')
     @vite('resources/js/tags.js')
