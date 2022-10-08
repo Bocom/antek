@@ -19,9 +19,7 @@
 
                     <x-tag-list class="my-4" :tags="$snippet->tags"></x-tag-list>
 
-                    <x-markdown>
-                        {{ $snippet->content }}
-                    </x-markdown>
+                    <x-snippet-content :content="$snippet->content"></x-snippet-content>
                 </div>
             </div>
         </div>
