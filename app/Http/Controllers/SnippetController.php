@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Snippet;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SnippetController extends Controller
 {
@@ -15,7 +17,27 @@ class SnippetController extends Controller
      */
     public function index()
     {
-        return view('snippets.index', ['snippets' => Snippet::all()]);
+        return view('snippets.index', [
+            'snippets' => Snippet::all()->sortByDesc->updated_at,
+        ]);
+    }
+
+    public function author(User $author)
+    {
+        return view('snippets.index', [
+            'snippets' => Snippet::where('author_id', $author->id)->get()->sortByDesc->updated_at,
+            'type' => 'author',
+            'author' => $author,
+        ]);
+    }
+
+    public function tag(Tag $tag)
+    {
+        return view('snippets.index', [
+            'snippets' => $tag->snippets->sortByDesc->updated_at,
+            'type' => 'tag',
+            'tag' => $tag,
+        ]);
     }
 
     /**
@@ -23,7 +45,7 @@ class SnippetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('snippets.create');
     }
@@ -46,11 +68,13 @@ class SnippetController extends Controller
         $snippet = Snippet::create($attributes);
 
         if ($request->has('tags')) {
-            $tags = str($request->input('tags'))->explode('|');
+            $tags = $request->string('tags')->explode('|');
+
             foreach ($tags as $name) {
                 $tag = Tag::firstOrCreate([
-                    'name' => $name,
+                    'name' => mb_strtolower($name),
                 ]);
+
                 $snippet->tags()->attach($tag);
             }
         }
@@ -66,6 +90,8 @@ class SnippetController extends Controller
      */
     public function show(Snippet $snippet)
     {
+        $snippet->increment('views');
+
         return view('snippets.show', ['snippet' => $snippet]);
     }
 
@@ -89,7 +115,29 @@ class SnippetController extends Controller
      */
     public function update(Request $request, Snippet $snippet)
     {
-        //
+        $attributes = $request->validate([
+            'title' => ['required', Rule::unique('snippets')->ignore($snippet)],
+            'content' => ['required'],
+        ]);
+
+        $snippet->update($attributes);
+
+        if ($request->has('tags')) {
+            $newTags = [];
+            $tags = $request->string('tags')->explode('|');
+
+            foreach ($tags as $name) {
+                $tag = Tag::firstOrCreate([
+                    'name' => mb_strtolower($name),
+                ]);
+
+                $newTags[] = $tag->id;
+            }
+
+            $snippet->tags()->sync($newTags);
+        }
+
+        return redirect()->route('snippets.show', ['snippet' => $snippet->id]);
     }
 
     /**

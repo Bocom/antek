@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="mt-6">
                             <x-primary-button>Create</x-primary-button>
                         </div>
                     </form>
