@@ -1,3 +1,5 @@
+@props(['content', 'dark' => false])
+
 <x-markdown class="snippet__content">
     {!! $content !!}
 </x-markdown>
