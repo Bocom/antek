@@ -12,7 +12,7 @@
                     <form method="POST" action="{{ route('snippets.store') }}">
                         @csrf
 
-                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                        <div class="grid grid-cols-1 gap-y-6">
                             <div class="sm:col-span-6">
                                 <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
                                 <div class="mt-1">
@@ -34,6 +34,32 @@
                                     <x-textarea id="content" name="content" rows="12">{{ old('content') }}</x-textarea>
                                 </div>
                                 <x-input-error :messages="$errors->get('content')" class="mt-1" />
+                            </div>
+                        </div>
+
+                        <div class="mt-4" x-data="{ files: [{ filename: '', content: '' }] }">
+                            <input type="hidden" :value="JSON.stringify(files)">
+
+                            <h3 class="font-bold text-xl mb-4">{{ __('Files') }}</h3>
+
+                            <div class="">
+                                <template x-for="(file, idx) in files">
+                                    <div class="grid grid-cols-1 gap-y-6 pb-6 border-b">
+                                        <div class="sm:col-span-6">
+                                            <label :for="`title-${idx}`" class="block text-sm font-medium text-gray-700">{{ __('Title/Filename') }}</label>
+                                            <div class="mt-1">
+                                                <x-text-input type="text" ::id="`title-${idx}`" class="w-full" x-model="file.filename" />
+                                            </div>
+                                        </div>
+
+                                        <div class="sm:col-span-6">
+                                            <label :for="`content-${idx}`" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
+                                            <div class="mt-1">
+                                                <x-textarea ::id="`content-${idx}`" rows="12" x-model="file.content"></x-textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
                             </div>
                         </div>
 
