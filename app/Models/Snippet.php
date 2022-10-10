@@ -26,4 +26,9 @@ class Snippet extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function files()
+    {
+        return $this->hasMany(SnippetFile::class);
+    }
 }
