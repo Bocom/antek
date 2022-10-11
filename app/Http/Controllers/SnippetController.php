@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Snippet;
+use App\Models\SnippetFile;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -65,6 +66,7 @@ class SnippetController extends Controller
 
         $attributes['author_id'] = $request->user()->id;
 
+        /** @var Snippet $snippet */
         $snippet = Snippet::create($attributes);
 
         if ($request->has('tags')) {
@@ -76,6 +78,16 @@ class SnippetController extends Controller
                 ]);
 
                 $snippet->tags()->attach($tag);
+            }
+        }
+
+        if ($request->has('files')) {
+            $files = json_decode($request->input('files'));
+            foreach ($files as $data) {
+                $snippet->files()->create([
+                    'filename' => $data->filename,
+                    'content' => $data->content,
+                ]);
             }
         }
 

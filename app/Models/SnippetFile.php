@@ -11,6 +11,11 @@ class SnippetFile extends Model
     use HasFactory;
     use HasUuids;
 
+    public $fillable = [
+        'filename',
+        'content',
+    ];
+
     public function snippet()
     {
         return $this->belongsTo(Snippet::class);

@@ -50,18 +50,18 @@
     }
 
     pre {
-        @apply border relative my-4 overflow-x-auto;
+        @apply border relative my-4 overflow-auto max-h-[1500px];
 
-        ::before {
+        /* ::before {
             content: attr(data-lang);
             right: 0.25rem;
             top: -0rem;
             z-index: 10;
             @apply block absolute border-l border-b rounded-bl;
-        }
+        } */
 
         code.torchlight {
-            @apply block py-4 min-w-max;
+            @apply block py-4 min-w-max relative;
 
             .line {
                 @apply px-4;

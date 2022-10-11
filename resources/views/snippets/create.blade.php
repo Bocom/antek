@@ -14,7 +14,7 @@
 
                         <div class="grid grid-cols-1 gap-y-6">
                             <div class="sm:col-span-6">
-                                <label for="title" class="block text-sm font-medium text-gray-700">{{ __('Title') }}</label>
+                                <label for="title" class="block font-medium text-gray-700">{{ __('Title') }}</label>
                                 <div class="mt-1">
                                     <x-text-input type="text" id="title" name="title" class="w-full" :value="old('title')" />
                                 </div>
@@ -22,14 +22,14 @@
                             </div>
 
                             <div class="sm:col-span-6">
-                                <label for="tags" class="block text-sm font-medium text-gray-700">{{ __('Tags') }}</label>
+                                <label for="tags" class="block font-medium text-gray-700">{{ __('Tags') }}</label>
                                 <div class="mt-1">
                                     <x-tag-select id="tags" name="tags" :value="old('tags')" />
                                 </div>
                             </div>
 
                             <div class="sm:col-span-6">
-                                <label for="content" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
+                                <label for="content" class="block font-medium text-gray-700">{{ __('Content') }}</label>
                                 <div class="mt-1">
                                     <x-textarea id="content" name="content" rows="12">{{ old('content') }}</x-textarea>
                                 </div>
@@ -37,23 +37,40 @@
                             </div>
                         </div>
 
-                        <div class="mt-4" x-data="{ files: [{ filename: '', content: '' }] }">
-                            <input type="hidden" :value="JSON.stringify(files)">
+                        <div class="mt-4" x-data="{ files: [] }">
+                            <input type="hidden" name="files" :value="JSON.stringify(files)">
 
-                            <h3 class="font-bold text-xl mb-4">{{ __('Files') }}</h3>
+                            <div class="flex items-center gap-x-2">
+                                <h3 class="font-bold text-xl">{{ __('Files') }}</h3>
 
-                            <div class="">
+                                <x-primary-button
+                                    x-on:click.prevent="files.push({ filename: '', content: '' })"
+                                    type="button"
+                                >
+                                    {{ __('Add') }}
+                                </x-primary-button>
+                            </div>
+
+                            <div>
                                 <template x-for="(file, idx) in files">
-                                    <div class="grid grid-cols-1 gap-y-6 pb-6 border-b">
+                                    <div class="grid grid-cols-1 gap-y-6 py-4 border-b first:border-0 first:pt-0">
                                         <div class="sm:col-span-6">
-                                            <label :for="`title-${idx}`" class="block text-sm font-medium text-gray-700">{{ __('Title/Filename') }}</label>
+                                            <div class="flex">
+                                                <label :for="`title-${idx}`" class="block font-medium text-gray-700">{{ __('Title/Filename') }}</label>
+
+                                                <button type="button" x-on:click.prevent="files.splice(idx)" class=" ml-2">
+                                                    <x-icons.trash class="w-6 h-6 text-red-500" />
+                                                </button>
+                                            </div>
+
                                             <div class="mt-1">
                                                 <x-text-input type="text" ::id="`title-${idx}`" class="w-full" x-model="file.filename" />
                                             </div>
                                         </div>
 
                                         <div class="sm:col-span-6">
-                                            <label :for="`content-${idx}`" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
+                                            <label :for="`content-${idx}`" class="block font-medium text-gray-700">{{ __('Content') }}</label>
+
                                             <div class="mt-1">
                                                 <x-textarea ::id="`content-${idx}`" rows="12" x-model="file.content"></x-textarea>
                                             </div>
@@ -63,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-6">
+                        <div class="mt-4">
                             <x-primary-button>Create</x-primary-button>
                         </div>
                     </form>
