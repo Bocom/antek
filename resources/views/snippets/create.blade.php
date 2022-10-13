@@ -58,7 +58,7 @@
                                             <div class="flex">
                                                 <label :for="`title-${idx}`" class="block font-medium text-gray-700">{{ __('Title/Filename') }}</label>
 
-                                                <button type="button" x-on:click.prevent="files.splice(idx)" class=" ml-2">
+                                                <button type="button" x-on:click.prevent="files.splice(idx, 1)" class=" ml-2">
                                                     <x-icons.trash class="w-6 h-6 text-red-500" />
                                                 </button>
                                             </div>

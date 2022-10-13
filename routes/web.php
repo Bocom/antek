@@ -31,12 +31,14 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('snippets/author/{author}', [SnippetController::class, 'author'])
+Route::prefix('snippets')
+    ->controller(SnippetController::class)
     ->middleware(['auth'])
-    ->name('snippets.author');
-Route::get('snippets/tag/{tag:name}', [SnippetController::class, 'tag'])
-    ->middleware(['auth'])
-    ->name('snippets.tag');
+    ->group(function () {
+        Route::get('author/{author}', 'author')->name('snippets.author');
+        Route::get('tag/{tag:name}', 'tag')->name('snippets.tag');
+    });
+
 Route::resource('snippets', SnippetController::class)->middleware(['auth']);
 
 require __DIR__ . '/auth.php';

@@ -26,7 +26,7 @@ class SnippetController extends Controller
     public function author(User $author)
     {
         return view('snippets.index', [
-            'snippets' => Snippet::where('author_id', $author->id)->get()->sortByDesc->updated_at,
+            'snippets' => $author->snippets->sortByDesc->updated_at,
             'type' => 'author',
             'author' => $author,
         ]);
