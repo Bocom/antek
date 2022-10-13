@@ -149,6 +149,29 @@ class SnippetController extends Controller
             $snippet->tags()->sync($newTags);
         }
 
+        if ($request->has('files')) {
+            $files = json_decode($request->input('files'));
+            $savedFiles = [];
+            foreach ($files as $data) {
+                if ($data->id === 'new') {
+                    $file = $snippet->files()->create([
+                        'filename' => $data->filename,
+                        'content' => $data->content,
+                    ]);
+                    $savedFiles[] = $file->id;
+                } else {
+                    $file = SnippetFile::find($data->id);
+                    if ($file !== null) {
+                        $file->filename = $data->filename;
+                        $file->content = $data->content;
+                        $file->save();
+                        $savedFiles[] = $file->id;
+                    }
+                }
+            }
+            SnippetFile::whereNotIn('id', $savedFiles)->delete();
+        }
+
         return redirect()->route('snippets.show', ['snippet' => $snippet->id]);
     }
 

@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-4" x-data="{ files: [] }">
+                        <div class="mt-4" x-data="{ files: {{ old('files', '[]') }} }">
                             <input type="hidden" name="files" :value="JSON.stringify(files)">
 
                             <div class="flex items-center gap-x-2">
