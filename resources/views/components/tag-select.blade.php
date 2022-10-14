@@ -1,22 +1,18 @@
-@props(['name', 'options' => [], 'selected', 'value' => null])
+@props(['name', 'selected', 'value' => null])
 
 <x-text-input type="text" {{ $attributes->merge(['name' => $name]) }} :$value />
 
 @pushOnce('scripts')
-    @vite('resources/js/tags.js')
+    @vite(['resources/js/tags.js', 'resources/css/components/tags.css'])
     <script>
-        window.existingTags = {{ Js::from(App\Models\Tag::all()->pluck('name')->map(fn ($tag) => ['label' => $tag, 'value' => $tag])) }};
+        window.existingTags = {{ Js::from(App\Models\Tag::all()->pluck('name')) }};
     </script>
 @endPushOnce
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const choices = new Choices('[name="{{ $name }}"]', {
-                choices: window.existingTags,
-                removeItemButton: true,
-                duplicateItemsAllowed: false,
-                delimiter: '|',
-                noResultsText: `{{ __('No tags found') }}`,
+            const tags = new Tagify(document.querySelector('[name="{{ $name }}"]'), {
+                whitelist: window.existingTags,
             });
         });
     </script>

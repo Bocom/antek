@@ -1,5 +1,4 @@
-import Choices from 'choices.js';
-import 'choices.js/public/assets/styles/choices.css';
-// import '@/css/components/tags.css';
+import Tagify from '@yaireo/tagify';
+import '@yaireo/tagify/dist/tagify.css';
 
-window.Choices = Choices;
+window.Tagify = Tagify;

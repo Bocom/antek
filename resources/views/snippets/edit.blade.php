@@ -25,7 +25,7 @@
                             <div class="sm:col-span-6">
                                 <label for="tags" class="block text-sm font-medium text-gray-700">{{ __('Tags') }}</label>
                                 <div class="mt-1">
-                                    <x-tag-select id="tags" name="tags" :value="old('tags', $snippet->tags->pluck('name')->join('|'))" />
+                                    <x-tag-select id="tags" name="tags" :value="old('tags', json_encode($snippet->tags->map->name))" />
                                 </div>
                             </div>
 

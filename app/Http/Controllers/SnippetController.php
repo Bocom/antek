@@ -70,11 +70,11 @@ class SnippetController extends Controller
         $snippet = Snippet::create($attributes);
 
         if ($request->has('tags')) {
-            $tags = $request->string('tags')->explode('|');
+            $tags = json_decode($request->input('tags'));
 
-            foreach ($tags as $name) {
+            foreach ($tags as $entry) {
                 $tag = Tag::firstOrCreate([
-                    'name' => mb_strtolower($name),
+                    'name' => mb_strtolower($entry->value),
                 ]);
 
                 $snippet->tags()->attach($tag);
@@ -158,11 +158,11 @@ class SnippetController extends Controller
 
         if ($request->has('tags')) {
             $newTags = [];
-            $tags = $request->string('tags')->explode('|');
+            $tags = json_decode($request->input('tags'));
 
-            foreach ($tags as $name) {
+            foreach ($tags as $entry) {
                 $tag = Tag::firstOrCreate([
-                    'name' => mb_strtolower($name),
+                    'name' => mb_strtolower($entry->value),
                 ]);
 
                 $newTags[] = $tag->id;

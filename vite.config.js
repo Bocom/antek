@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/tags.js',
                 'resources/css/components/snippet.css',
+                'resources/css/components/tags.css',
             ],
             refresh: true,
         }),
