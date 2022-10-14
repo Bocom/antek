@@ -14,7 +14,14 @@ class SnippetFile extends Model
     public $fillable = [
         'filename',
         'content',
+        'type',
+        'syntax'
     ];
+
+    public function codeBlock()
+    {
+        return "```{$this->syntax}\n{$this->content}\n```";
+    }
 
     public function snippet()
     {

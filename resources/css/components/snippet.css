@@ -45,6 +45,10 @@
         @apply rounded;
     }
 
+    .snippet-file__toolbar + .snippet__content > pre {
+        @apply rounded-t-none;
+    }
+
     code:not(.torchlight) {
         @apply border p-1 bg-slate-100 text-[0.875rem];
     }

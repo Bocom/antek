@@ -87,6 +87,8 @@ class SnippetController extends Controller
                 $snippet->files()->create([
                     'filename' => $data->filename,
                     'content' => $data->content,
+                    'type' => $data->type,
+                    'syntax' => $data->syntax,
                 ]);
             }
         }
@@ -105,6 +107,26 @@ class SnippetController extends Controller
         $snippet->increment('views');
 
         return view('snippets.show', ['snippet' => $snippet]);
+    }
+
+    public function raw(Snippet $snippet)
+    {
+        return response(
+            content: $snippet->content,
+            headers: [
+                'Content-Type' => 'text/plain',
+            ],
+        );
+    }
+
+    public function rawFile(SnippetFile $file)
+    {
+        return response(
+            content: $file->content,
+            headers: [
+                'Content-Type' => 'text/plain',
+            ],
+        );
     }
 
     /**
@@ -152,11 +174,14 @@ class SnippetController extends Controller
         if ($request->has('files')) {
             $files = json_decode($request->input('files'));
             $savedFiles = [];
+
             foreach ($files as $data) {
                 if ($data->id === 'new') {
                     $file = $snippet->files()->create([
                         'filename' => $data->filename,
                         'content' => $data->content,
+                        'type' => $data->type,
+                        'syntax' => $data->syntax,
                     ]);
                     $savedFiles[] = $file->id;
                 } else {
@@ -164,11 +189,14 @@ class SnippetController extends Controller
                     if ($file !== null) {
                         $file->filename = $data->filename;
                         $file->content = $data->content;
+                        $file->type = $data->type;
+                        $file->syntax = $data->syntax;
                         $file->save();
                         $savedFiles[] = $file->id;
                     }
                 }
             }
+
             SnippetFile::whereNotIn('id', $savedFiles)->delete();
         }
 

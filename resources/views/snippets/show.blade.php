@@ -11,12 +11,17 @@
                         <div class="flex justify-between items-center mb-2">
                             <h2 class="font-bold text-2xl">{{ $snippet->title }}</h2>
 
-                            <a
-                                href="{{ route('snippets.edit', ['snippet' => $snippet->id]) }}"
-                                class="underline hover:no-underline"
-                            >
-                                {{ __('Edit') }}
-                            </a>
+                            <div>
+                                <a
+                                    href="{{ route('snippets.raw', ['snippet' => $snippet->id]) }}" target="_blank"
+                                    class="underline hover:no-underline mr-4"
+                                >{{ __('Raw') }}</a>
+
+                                <a
+                                    href="{{ route('snippets.edit', ['snippet' => $snippet->id]) }}"
+                                    class="underline hover:no-underline"
+                                >{{ __('Edit') }}</a>
+                            </div>
                         </div>
 
                         <div>
@@ -35,16 +40,21 @@
                         <x-tag-list class="my-4" :tags="$snippet->tags"></x-tag-list>
                     </div>
 
-                    <x-snippet-content :content="$snippet->content"></x-snippet-content>
+                    <x-snippet-content :content="$snippet->content" />
                 </div>
             </div>
 
             @foreach ($snippet->files as $file)
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8 last:mb-0">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <h3 class="font-bold text-2xl mb-4">{{ $file->filename }}</h3>
+                        <div class="flex items-center gap-x-2 mb-4">
+                            <h3 class="font-bold text-2xl">{{ $file->filename }}</h3>
 
-                        <x-snippet-content :content="$file->content"></x-snippet-content>
+                            <button class="hover:bg-slate-100 p-1 rounded"><x-icons.clipboard-document class="w-6 h-6" /></button>
+                        </div>
+
+                        <x-file-toolbar :raw="route('snippets.raw-file', ['file' => $file->id])" />
+                        <x-snippet-content :content="$file->type === 'text' ? $file->content : $file->codeBlock()" />
                     </div>
                 </div>
             @endforeach
