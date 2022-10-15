@@ -13,7 +13,8 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "@yaireo/tagify": "^4.16.4",
         "alpinejs": "^3.4.2",
-        "@yaireo/tagify": "^4.16.4"
+        "lodash-es": "^4.17.21"
     }
 }
