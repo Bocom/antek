@@ -15,7 +15,7 @@ class SnippetFile extends Model
         'filename',
         'content',
         'type',
-        'syntax'
+        'syntax',
     ];
 
     public function codeBlock()
