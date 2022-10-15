@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSnippetRequest;
+use App\Http\Requests\UpdateSnippetRequest;
 use App\Models\Snippet;
 use App\Models\SnippetFile;
 use App\Models\Tag;
@@ -54,15 +56,12 @@ class SnippetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreSnippetRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSnippetRequest $request)
     {
-        $attributes = $request->validate([
-            'title' => ['required', 'unique:snippets'],
-            'content' => ['required'],
-        ]);
+        $attributes = $request->validated();
 
         $attributes['author_id'] = $request->user()->id;
 
@@ -143,16 +142,13 @@ class SnippetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateSnippetRequest  $request
      * @param  \App\Models\Snippet  $snippet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Snippet $snippet)
+    public function update(UpdateSnippetRequest $request, Snippet $snippet)
     {
-        $attributes = $request->validate([
-            'title' => ['required', Rule::unique('snippets')->ignore($snippet)],
-            'content' => ['required'],
-        ]);
+        $attributes = $request->validated();
 
         $snippet->update($attributes);
 
