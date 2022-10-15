@@ -17,7 +17,7 @@
     }
 
     p {
-        @apply my-1;
+        @apply mt-1 mb-2;
     }
 
     li {

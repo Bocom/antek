@@ -35,10 +35,10 @@
         </button>
     </div>
 
-    <div class="absolute bg-white p-4 rounded-md shadow border-gray-300">
-        <ul class="flex flex-col gap-y-4">
+    <div class="absolute bg-white p-2 rounded-md shadow border-gray-300 w-full" x-cloak x-show="results.length > 0">
+        <ul class="flex flex-col gap-y-1">
             <template x-for="result in results">
-                <li><a :href="result.link" x-text="result.title"></a></li>
+                <li><a :href="result.link" class="flex w-full p-2 hover:bg-gray-50" x-text="result.title"></a></li>
             </template>
         </ul>
     </div>
