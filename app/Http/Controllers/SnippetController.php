@@ -8,8 +8,6 @@ use App\Models\Snippet;
 use App\Models\SnippetFile;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class SnippetController extends Controller
 {
