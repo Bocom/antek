@@ -19,20 +19,20 @@
         this.searching = false;
     },
 }">
-    <div class="flex ">
-        <input
-            @input.debounce.300ms="search"
-            class="p-2 rounded-md rounded-r-none shadow-sm border border-r-0 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-            placeholder="{{ __('Search...') }}"
-        >
-
-        <button
-            type="button"
-            class="pl-2rounded-md rounded-l-none shadow-sm border border-l-0"
-            x-on:click="search"
-        >
-            <x-icons.search class="w-6 h-6" />
-        </button>
+    <div class="w-full max-w-lg lg:max-w-xs">
+        <label for="search" class="sr-only">{{ __('Search') }}</label>
+        <div class="relative text-gray-400 focus-within:text-gray-600">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <x-icons.search class="w-5 h-5" />
+            </div>
+            <input
+                type="search"
+                id="search"
+                class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 sm:text-sm"
+                placeholder="Search"
+                @input.debounce.300ms="search"
+            >
+        </div>
     </div>
 
     <div class="absolute bg-white p-2 rounded-md shadow border-gray-300 w-full" x-cloak x-show="results.length > 0">
