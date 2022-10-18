@@ -26,7 +26,7 @@ Route::get('/', function (Request $request) {
 
 Route::get('/dashboard', function () {
     return view('dashboard', [
-        'latestSnippets' => Snippet::orderBy('created_at', 'desc')->take(5)->get(),
+        'latestSnippets' => Snippet::latest()->take(5)->get(),
         'mostViewedSnippets' => Snippet::orderBy('views', 'desc')->take(5)->get(),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');

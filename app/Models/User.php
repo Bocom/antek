@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Snippet::class, 'author_id');
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Snippet::class, 'user_favorite')->using(UserFavorite::class);
+    }
 }
