@@ -7,6 +7,9 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/tags.js',
+                'resources/css/components/snippet.css',
+                'resources/css/components/tags.css',
             ],
             refresh: true,
         }),

@@ -1,16 +1,32 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+                <x-dashboard-panel :title="__('Latest Snippets')">
+                    <ul class="flex flex-col gap-y-4">
+                        @foreach ($latestSnippets as $snippet)
+                            <x-snippet-item :$snippet></x-snippet-item>
+                        @endforeach
+                    </ul>
+                </x-dashboard-panel>
+
+                <x-dashboard-panel :title="__('Most Viewed Snippets')">
+                    <ul class="flex flex-col gap-y-4">
+                        @foreach ($mostViewedSnippets as $snippet)
+                            <x-snippet-item :$snippet></x-snippet-item>
+                        @endforeach
+                    </ul>
+                </x-dashboard-panel>
+
+                <x-dashboard-panel :title="__('Some Other Panel')">
+                    Let's put something here some other time
+                </x-dashboard-panel>
             </div>
         </div>
     </div>

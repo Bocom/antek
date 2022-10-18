@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function snippets()
+    {
+        return $this->hasMany(Snippet::class, 'author_id');
+    }
 }

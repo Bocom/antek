@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('snippets', function (Blueprint $table) {
-            $table->uuid();
+            $table->uuid('id');
             $table->foreignIdFor(User::class, 'author_id');
             $table->string('title');
             $table->longText('content');

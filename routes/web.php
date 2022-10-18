@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SnippetController;
+use App\Models\Snippet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +25,22 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'latestSnippets' => Snippet::orderBy('created_at', 'desc')->take(5)->get(),
+        'mostViewedSnippets' => Snippet::orderBy('views', 'desc')->take(5)->get(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('snippets')
+    ->controller(SnippetController::class)
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('author/{author}', 'author')->name('snippets.author');
+        Route::get('tag/{tag:name}', 'tag')->name('snippets.tag');
+        Route::get('file/{file}', 'rawFile')->name('snippets.raw-file');
+        Route::get('{snippet}/raw', 'raw')->name('snippets.raw');
+    });
+
+Route::resource('snippets', SnippetController::class)->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
