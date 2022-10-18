@@ -12,7 +12,7 @@
                             <div class="flex items-center gap-x-2">
                                 <h2 class="font-bold text-2xl">{{ $snippet->title }}</h2>
 
-                                <x-favorite :snippet="$snippet" />
+                                <livewire:favorite :snippet="$snippet" />
                             </div>
 
                             <div>

@@ -24,10 +24,11 @@ Route::get('/', function (Request $request) {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', function (Request $request) {
     return view('dashboard', [
         'latestSnippets' => Snippet::latest()->take(5)->get(),
         'mostViewedSnippets' => Snippet::orderBy('views', 'desc')->take(5)->get(),
+        'favoriteSnippets' => $request->user()->favorites()->simplePaginate(5),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

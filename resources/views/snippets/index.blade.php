@@ -18,9 +18,11 @@
                     </h2>
 
                     <ul class="flex flex-col gap-y-4">
-                        @foreach ($snippets as $snippet)
+                        @forelse ($snippets as $snippet)
                             <x-snippet-item :$snippet></x-snippet-item>
-                        @endforeach
+                        @empty
+                            <li>{{ __('There are no snippets.') }}</li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
