@@ -36,6 +36,7 @@ Route::prefix('snippets')
     ->controller(SnippetController::class)
     ->middleware(['auth'])
     ->group(function () {
+        Route::get('favorites', 'favorites')->name('snippets.favorites');
         Route::get('author/{author}', 'author')->name('snippets.author');
         Route::get('tag/{tag:name}', 'tag')->name('snippets.tag');
         Route::get('file/{file}', 'rawFile')->name('snippets.raw-file');

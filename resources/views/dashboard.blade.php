@@ -28,8 +28,8 @@
                     </ul>
                 </x-dashboard-panel>
 
-                <x-dashboard-panel :title="__('Favorite Snippets')">
-                    <ul class="flex flex-col gap-y-4 mb-4">
+                <x-dashboard-panel :title="__('Favorite Snippets')" :href="route('snippets.favorites')">
+                    <ul class="flex flex-col gap-y-4">
                         @forelse ($favoriteSnippets as $snippet)
                             <x-snippet-item :$snippet></x-snippet-item>
                         @empty
