@@ -13,7 +13,11 @@
                         <form method="GET">
                             <div class="flex gap-x-4 items-center">
                                 <div>
-                                    <select id="limit" name="limit">
+                                    <select
+                                        id="limit"
+                                        name="limit"
+                                        class="rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    >
                                         <option @selected(request('limit') == 5)>5</option>
                                         <option @selected(request('limit', 10) == 10)>10</option>
                                         <option @selected(request('limit') == 20)>20</option>
