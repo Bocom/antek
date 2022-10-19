@@ -8,17 +8,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="font-bold text-xl">
-                            @if (!isset($type))
-                                {{ __('All Snippets') }}
-                            @elseif ($type === 'author')
-                                {{ __('Snippets by :name', ['name' => $author->name]) }}
-                            @elseif ($type === 'tag')
-                                {{ __('Snippets Tagged #:tag', ['tag' => $tag->name]) }}
-                            @elseif ($type === 'favorites')
-                                {{ __('Favorite Snippets') }}
-                            @endif
-                        </h2>
+                        <h2 class="font-bold text-xl">{{ $title }}</h2>
 
                         <form method="GET">
                             <div class="flex gap-x-4 items-center">

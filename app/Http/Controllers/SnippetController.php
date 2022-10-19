@@ -21,6 +21,7 @@ class SnippetController extends Controller
     {
         return view('snippets.index', [
             'snippets' => $this->paginateSnippets($request, Snippet::orderBy('updated_at', 'desc')),
+            'title' => __('All Snippets'),
         ]);
     }
 
@@ -28,8 +29,7 @@ class SnippetController extends Controller
     {
         return view('snippets.index', [
             'snippets' => $this->paginateSnippets($request, $author->snippets()->orderByDesc('updated_at')),
-            'type' => 'author',
-            'author' => $author,
+            'title' => __('Snippets by :name', ['name' => $author->name]),
         ]);
     }
 
@@ -37,8 +37,7 @@ class SnippetController extends Controller
     {
         return view('snippets.index', [
             'snippets' => $this->paginateSnippets($request, $tag->snippets()->orderByDesc('updated_at')),
-            'type' => 'tag',
-            'tag' => $tag,
+            'title' => __('Snippets Tagged #:tag', ['tag' => $tag->name]),
         ]);
     }
 
@@ -46,7 +45,7 @@ class SnippetController extends Controller
     {
         return view('snippets.index', [
             'snippets' => $this->paginateSnippets($request, $request->user()->favorites()),
-                'type' => 'favorites',
+            'title' => __('Favorite Snippets'),
         ]);
     }
 
