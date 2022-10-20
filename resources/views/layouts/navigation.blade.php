@@ -23,8 +23,9 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-search-field class="mr-6" />
+            <div class="hidden sm:flex sm:items-center sm:ml-6 gap-x-6">
+                <!-- Search -->
+                <livewire:search />
 
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
