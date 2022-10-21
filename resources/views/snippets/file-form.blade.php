@@ -69,10 +69,12 @@
                         >
                             <option>{{ __('Select syntax') }}</option>
                             <option value="js">JavaScript</option>
+                            <option value="ts">TypeScript</option>
                             <option value="json">JSON</option>
                             <option value="blade">Laravel Blade</option>
                             <option value="php">PHP</option>
                             <option value="yaml">YAML</option>
+                            <option value="md">Markdown</option>
                         </select>
                     </div>
                 </div>

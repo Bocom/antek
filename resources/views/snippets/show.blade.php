@@ -9,11 +9,16 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="border-b mb-4">
                         <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold text-2xl">{{ $snippet->title }}</h2>
+                            <div class="flex items-center gap-x-2">
+                                <h2 class="font-bold text-2xl">{{ $snippet->title }}</h2>
+
+                                <livewire:favorite :snippet="$snippet" />
+                            </div>
 
                             <div>
                                 <a
-                                    href="{{ route('snippets.raw', ['snippet' => $snippet->id]) }}" target="_blank"
+                                    href="{{ route('snippets.raw', ['snippet' => $snippet->id]) }}"
+                                    target="_blank"
                                     class="underline hover:no-underline mr-4"
                                 >{{ __('Raw') }}</a>
 

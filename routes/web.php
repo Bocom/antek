@@ -24,10 +24,11 @@ Route::get('/', function (Request $request) {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/dashboard', function (Request $request) {
     return view('dashboard', [
-        'latestSnippets' => Snippet::orderBy('created_at', 'desc')->take(5)->get(),
+        'latestSnippets' => Snippet::latest()->take(5)->get(),
         'mostViewedSnippets' => Snippet::orderBy('views', 'desc')->take(5)->get(),
+        'favoriteSnippets' => $request->user()->favorites()->simplePaginate(5),
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -35,6 +36,7 @@ Route::prefix('snippets')
     ->controller(SnippetController::class)
     ->middleware(['auth'])
     ->group(function () {
+        Route::get('favorites', 'favorites')->name('snippets.favorites');
         Route::get('author/{author}', 'author')->name('snippets.author');
         Route::get('tag/{tag:name}', 'tag')->name('snippets.tag');
         Route::get('file/{file}', 'rawFile')->name('snippets.raw-file');

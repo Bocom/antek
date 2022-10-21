@@ -20,6 +20,10 @@ class Snippet extends Model
         'content',
     ];
 
+    public $casts = [
+        'views' => 'integer',
+    ];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');

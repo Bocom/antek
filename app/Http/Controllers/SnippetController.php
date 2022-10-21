@@ -8,6 +8,7 @@ use App\Models\Snippet;
 use App\Models\SnippetFile;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class SnippetController extends Controller
 {
@@ -16,29 +17,46 @@ class SnippetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('snippets.index', [
-            'snippets' => Snippet::all()->sortByDesc->updated_at,
+            'snippets' => $this->paginateSnippets($request, Snippet::orderBy('updated_at', 'desc')),
+            'title' => __('All Snippets'),
         ]);
     }
 
-    public function author(User $author)
+    public function author(Request $request, User $author)
     {
         return view('snippets.index', [
-            'snippets' => $author->snippets->sortByDesc->updated_at,
-            'type' => 'author',
-            'author' => $author,
+            'snippets' => $this->paginateSnippets($request, $author->snippets()->orderByDesc('updated_at')),
+            'title' => __('Snippets by :name', ['name' => $author->name]),
         ]);
     }
 
-    public function tag(Tag $tag)
+    public function tag(Request $request, Tag $tag)
     {
         return view('snippets.index', [
-            'snippets' => $tag->snippets->sortByDesc->updated_at,
-            'type' => 'tag',
-            'tag' => $tag,
+            'snippets' => $this->paginateSnippets($request, $tag->snippets()->orderByDesc('updated_at')),
+            'title' => __('Snippets Tagged #:tag', ['tag' => $tag->name]),
         ]);
+    }
+
+    public function favorites(Request $request)
+    {
+        return view('snippets.index', [
+            'snippets' => $this->paginateSnippets($request, $request->user()->favorites()),
+            'title' => __('Favorite Snippets'),
+        ]);
+    }
+
+    protected function paginateSnippets(Request $request, $snippets)
+    {
+        $perPage = $request->input('limit', 10);
+
+        $snippets = $snippets->simplePaginate($perPage);
+        $snippets->appends(['limit' => $perPage]);
+
+        return $snippets;
     }
 
     /**
