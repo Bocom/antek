@@ -16,7 +16,7 @@
     </div>
 
     @if ($searching)
-        <div class="absolute bg-white p-2 rounded-md shadow border-gray-300 w-full" x-cloak>
+        <div class="absolute mt-1 bg-white p-2 rounded-md shadow-lg border border-gray-100 w-full" x-cloak>
             <div wire:loading>
                 {{ __('Searching...') }}
             </div>
@@ -28,7 +28,7 @@
                     <ul class="flex flex-col gap-y-1" v-else>
                         @foreach ($results as $result)
                             <li>
-                                <a href="{{ $result->link }}" class="flex w-full p-2 hover:bg-gray-50">
+                                <a href="{{ $result->link }}" class="flex w-full p-2 hover:bg-gray-100 rounded">
                                     {{ $result->title }}
                                 </a>
                             </li>

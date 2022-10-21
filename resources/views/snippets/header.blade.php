@@ -2,4 +2,4 @@
     {{ __('Snippets') }}
 </h1>
 
-<a href="{{ route('snippets.create') }}">{{ __('New') }}</a>
+<a href="{{ route('snippets.create') }}" class="hover:bg-gray-100 p-2 rounded">{{ __('New') }}</a>
