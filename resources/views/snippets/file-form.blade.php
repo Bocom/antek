@@ -2,7 +2,7 @@
     <input type="hidden" name="files" :value="JSON.stringify(files)">
 
     <div class="flex items-center gap-x-2">
-        <h3 class="font-bold text-xl">{{ __('Files') }}</h3>
+        <h3 class="font-bold text-xl text-black dark:text-gray-200">{{ __('Files') }}</h3>
 
         <x-primary-button
             x-on:click.prevent="files.push({ filename: '', content: '', type: 'text', syntax: null })"
@@ -13,12 +13,10 @@
     </div>
     <div>
         <template x-for="(file, idx) in files">
-            <div class="grid grid-cols-1 gap-y-4 py-4 border-b first:border-0 first:pt-0">
+            <div class="grid grid-cols-1 gap-y-4 py-4 border-b first:border-0 first:pt-0 dark:border-gray-400">
                 <div>
-                    <div class="flex">
-                        <label :for="`title-${idx}`" class="block font-medium text-gray-700">
-                            {{ __('Title/Filename') }}
-                        </label>
+                    <div class="flex items-center">
+                        <x-input-label ::for="`title-${idx}`">{{ __('Title/Filename') }}</x-input-label>
 
                         <button
                             type="button"
@@ -39,13 +37,11 @@
 
                 <div class="flex">
                     <div class="mr-4">
-                        <label :for="`type-${idx}`" class="block font-medium text-gray-700">
-                            {{ __('Type') }}
-                        </label>
+                        <x-input-label ::for="`type-${idx}`">{{ __('Type') }}</x-input-label>
 
                         <select
                             :id="`type-${idx}`"
-                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-800"
                             x-model="file.type"
                             @change="(e) => file.type === 'text' ? (file.syntax = null) : null"
                         >
@@ -55,16 +51,11 @@
                     </div>
 
                     <div x-show="file.type === 'code'">
-                        <label
-                            :for="`syntax-${idx}`"
-                            class="block font-medium text-gray-700"
-                        >
-                            {{ __('Syntax') }}
-                        </label>
+                        <x-input-label ::for="`syntax-${idx}`">{{ __('Syntax') }}</x-input-label>
 
                         <select
                             :id="`syntax-${idx}`"
-                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                            class="rounded-md shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 bg-white dark:bg-gray-700 dark:text-gray-200 dark:border-gray-800"
                             x-model="file.syntax"
                         >
                             <option>{{ __('Select syntax') }}</option>
@@ -80,9 +71,7 @@
                 </div>
 
                 <div>
-                    <label :for="`content-${idx}`" class="block font-medium text-gray-700">
-                        {{ __('Content') }}
-                    </label>
+                    <x-input-label ::for="`content-${idx}`">{{ __('Content') }}</x-input-label>
 
                     <x-textarea
                         ::id="`content-${idx}`"
