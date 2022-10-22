@@ -12,10 +12,25 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @livewireStyles
+
+        @stack('styles')
+
+        <script>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+              document.documentElement.classList.add('dark')
+            } else {
+              document.documentElement.classList.remove('dark')
+            }
+        </script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans bg-white text-gray-900 antialiased dark:bg-gray-900 dark:text-gray-300">
             {{ $slot }}
         </div>
+
+        @stack('scripts')
+        @livewireScripts
     </body>
 </html>
