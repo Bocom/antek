@@ -8,7 +8,7 @@
             <input
                 type="search"
                 id="search"
-                class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 sm:text-sm"
+                class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 sm:text-sm dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 placeholder="Search"
                 wire:input.debounce.200ms="search($event.target.value)"
             >
@@ -16,7 +16,7 @@
     </div>
 
     @if ($searching)
-        <div class="absolute mt-1 bg-white p-2 rounded-md shadow-lg border border-gray-100 w-full" x-cloak>
+        <div class="absolute mt-1 bg-white p-2 rounded-md shadow-lg border border-gray-100 w-full dark:bg-gray-800 dark:border-gray-700 dark:shadow-md dark:text-gray-200" x-cloak>
             <div wire:loading>
                 {{ __('Searching...') }}
             </div>
@@ -28,7 +28,7 @@
                     <ul class="flex flex-col gap-y-1" v-else>
                         @foreach ($results as $result)
                             <li>
-                                <a href="{{ $result->link }}" class="flex w-full p-2 hover:bg-gray-100 rounded">
+                                <a href="{{ $result->link }}" class="flex w-full p-2 text-black hover:bg-gray-100 rounded dark:text-gray-200 dark:hover:bg-gray-700">
                                     {{ $result->title }}
                                 </a>
                             </li>
