@@ -5,7 +5,7 @@
             <x-icons.star class="w-6 h-6 text-yellow-300" />
         @else
             <span class="sr-only">{{ __('Add to favorites') }}</span>
-            <x-icons.star-outline class="w-6 h-6" />
+            <x-icons.star-outline class="w-6 h-6 dark:text-gray-200" />
         @endif
     </button>
 </div>

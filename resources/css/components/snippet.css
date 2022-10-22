@@ -1,4 +1,6 @@
 .snippet__content {
+    @apply text-black dark:text-gray-300;
+
     h2,
     h3 {
         @apply font-bold;
@@ -42,7 +44,7 @@
 
     pre,
     code {
-        @apply rounded;
+        @apply rounded bg-white dark:bg-gray-700;
     }
 
     .snippet-file__toolbar + .snippet__content > pre {
@@ -50,7 +52,7 @@
     }
 
     code:not(.torchlight) {
-        @apply border p-1 bg-slate-100 text-[0.875rem];
+        @apply border p-1 bg-slate-100 text-[0.875rem] dark:bg-gray-700 dark:border-gray-600;
     }
 
     pre {

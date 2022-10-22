@@ -11,7 +11,7 @@ return [
 
     // Which theme you want to use. You can find all of the themes at
     // https://torchlight.dev/docs/themes.
-    'theme' => env('TORCHLIGHT_THEME', 'github-light'),
+    'theme' => env('TORCHLIGHT_THEME', 'github-dark'),
 
     // If you want to use two separate themes for dark and light modes,
     // you can use an array to define both themes. Torchlight renders
@@ -31,7 +31,7 @@ return [
     // The Host of the API.
     'host' => env('TORCHLIGHT_HOST', 'https://api.torchlight.dev'),
 
-    'request_timeout' => 30,
+    'request_timeout' => 60,
 
     // We replace tabs in your code blocks with spaces in HTML. Set
     // the number of spaces you'd like to use per tab. Set to
