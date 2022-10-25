@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: docker/app.Dockerfile
+        image: antek-app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '8000:80'
+        networks:
+            - antek
+        depends_on:
+            - mariadb
+            - meilisearch
+
+    mariadb:
+        image: 'mariadb:10'
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'root'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: 'antek'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'antek-mariadb:/var/lib/mysql'
+        networks:
+            - antek
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-proot"]
+            retries: 3
+            timeout: 5s
+
+    meilisearch:
+        image: 'getmeili/meilisearch:latest'
+        ports:
+            - '7700:7700'
+        volumes:
+            - 'antek-meilisearch:/data.ms'
+        networks:
+            - antek
+        healthcheck:
+            test: ["CMD", "wget", "--no-verbose", "--spider",  "http://localhost:7700/health"]
+            retries: 3
+            timeout: 5s
+
+networks:
+    antek:
+        driver: bridge
+
+volumes:
+    antek-mariadb:
+        driver: local
+    antek-meilisearch:
+        driver: local
