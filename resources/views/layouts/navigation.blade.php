@@ -43,6 +43,8 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <x-theme-switcher />
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -91,6 +93,8 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-theme-switcher />
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

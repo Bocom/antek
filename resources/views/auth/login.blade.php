@@ -48,7 +48,7 @@
                 </label>
             </div>
 
-            <div class="flex justify-between items-center justify-end mt-4">
+            <div class="flex justify-between items-center mt-4">
                 <a
                     class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
                     href="{{ route('register') }}"
