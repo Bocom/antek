@@ -11,7 +11,7 @@
                 <x-dashboard-panel :title="__('Latest Snippets')">
                     <ul class="flex flex-col gap-y-4">
                         @forelse ($latestSnippets as $snippet)
-                            <x-snippet-item :$snippet></x-snippet-item>
+                            <x-snippet-item :$snippet />
                         @empty
                             <li>{{ __('There are no snippets.') }}</li>
                         @endforelse
@@ -21,7 +21,7 @@
                 <x-dashboard-panel :title="__('Most Viewed Snippets')">
                     <ul class="flex flex-col gap-y-4">
                         @forelse ($mostViewedSnippets as $snippet)
-                            <x-snippet-item :$snippet></x-snippet-item>
+                            <x-snippet-item :$snippet />
                         @empty
                             <li>{{ __('There are no snippets.') }}</li>
                         @endforelse
@@ -31,7 +31,7 @@
                 <x-dashboard-panel :title="__('Favorite Snippets')" :href="route('snippets.favorites')">
                     <ul class="flex flex-col gap-y-4">
                         @forelse ($favoriteSnippets as $snippet)
-                            <x-snippet-item :$snippet></x-snippet-item>
+                            <x-snippet-item :$snippet />
                         @empty
                             <li>{{ __('You have no favorite snippets.') }}</li>
                         @endforelse
