@@ -14,6 +14,28 @@ Snippet manager built using [Laravel 9](https://laravel.com/docs/9.x).
 
 ## Getting Started
 
+### With `just`
+
+```shell
+> just setup
+```
+
+Make additional changes to your `.env` file, like adding a Torchlight token, setting the desired application environment or [setting up SQLite](https://laravel.com/docs/9.x/database#sqlite-configuration).
+
+Run database migrations.
+
+```shell
+> php artisan migrate
+```
+
+Build frontend assets (or start the dev server).
+
+```shell
+> pnpm build # or `pnpm dev` to start the dev server
+```
+
+### Manual Setup
+
 ```shell
 > composer install
 > cp .env.example .env
@@ -28,18 +50,20 @@ Snippet manager built using [Laravel 9](https://laravel.com/docs/9.x).
 
 **NOTE:** This Docker setup is not suitable for development out-of-the box yet.
 
-Clone the repository and run the following command to install then necessary dependencies, create a `.env` file and generate an app key.
+This section uses [just](https://github.com/casey/just) to simplify the commands, but it's not a requirement. Just look in the `justfile` for the appropriate commands.
+
+Clone the repository and run the following command to install the necessary dependencies, create a `.env` file, generate an app key and build frontend dependencies.
 
 ```shell
-> just setup
+> just docker-setup
 ```
 
-Make changes to your `.env` file if necessary.
+Make additional changes to your `.env` file, like adding a Torchlight token or setting the desired application environment.
 
-Run the following command to build the assets and the application Docker image.
+Run the following command to build the Docker application image.
 
 ```shell
-> just build
+> just docker-build
 ```
 
 Start the containers by running the following command.
