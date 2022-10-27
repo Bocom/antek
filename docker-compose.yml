@@ -39,7 +39,7 @@ services:
         # ports:
         #     - '7700:7700'
         volumes:
-            - 'antek-meilisearch:/data.ms'
+            - 'antek-meilisearch:/meili_data'
         networks:
             - antek
         healthcheck:
