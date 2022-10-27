@@ -16,6 +16,7 @@ class Search extends Component
         if ($query === '') {
             $this->searching = false;
             $this->results = [];
+
             return;
         }
 

@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!empty(config('torchlight.token'))) {
+        if (! empty(config('torchlight.token'))) {
             $extensions = config('markdown.extensions');
             $extensions[] = TorchlightExtension::class;
             config(['markdown.extensions' => $extensions]);
