@@ -1,5 +1,5 @@
 <div class="p-2 flex items-center justify-center" x-data="{
-    theme: localStorage.theme ?? 'light',
+    theme: localStorage.theme ?? 'system',
 
     setTheme(t) {
         this.theme = t;
