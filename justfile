@@ -3,22 +3,21 @@ set windows-shell := ["pwsh.exe", "-c"]
 alias up := start
 alias down := stop
 
-# Build assets and Docker image
+# Build assets
 build:
-    pnpm build
-    docker compose build
+    ./node_modules/.bin/vite build
 
 # Start Docker container
 start:
-    docker compose up -d
+    docker-compose up -d
 
 # Stop Docker container
 stop:
-    docker compose stop
+    docker-compose stop
 
 # Destroy Docker container and volumes
 destroy:
-    docker compose down --volumes
+    docker-compose down --volumes
 
 # Install PHP and Node dependencies
 install:
@@ -34,7 +33,12 @@ shell:
     docker compose exec app sh
 
 setup: install
-    cp .env.docker .env
+    cp .env.example .env
     php artisan key:generate
 
-docker-setup: setup migrate build
+docker-build:
+    docker-compose build
+
+docker-setup: install && build
+    cp .env.docker .env
+    php artisan key:generate
