@@ -13,7 +13,7 @@
                         @forelse ($latestSnippets as $snippet)
                             <x-snippet-item :$snippet />
                         @empty
-                            <li>{{ __('There are no snippets.') }}</li>
+                            <li class="text-black dark:text-gray-300">{{ __('There are no snippets.') }}</li>
                         @endforelse
                     </ul>
                 </x-dashboard-panel>
@@ -23,7 +23,7 @@
                         @forelse ($mostViewedSnippets as $snippet)
                             <x-snippet-item :$snippet />
                         @empty
-                            <li>{{ __('There are no snippets.') }}</li>
+                            <li class="text-black dark:text-gray-300">{{ __('There are no snippets.') }}</li>
                         @endforelse
                     </ul>
                 </x-dashboard-panel>
@@ -33,7 +33,7 @@
                         @forelse ($favoriteSnippets as $snippet)
                             <x-snippet-item :$snippet />
                         @empty
-                            <li>{{ __('You have no favorite snippets.') }}</li>
+                            <li class="text-black dark:text-gray-300">{{ __('You have no favorite snippets.') }}</li>
                         @endforelse
                     </ul>
 

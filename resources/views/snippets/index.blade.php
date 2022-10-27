@@ -37,7 +37,7 @@
                         @forelse ($snippets as $snippet)
                             <x-snippet-item :$snippet></x-snippet-item>
                         @empty
-                            <li>{{ __('There are no snippets.') }}</li>
+                            <li class="text-black dark:text-gray-300">{{ __('There are no snippets.') }}</li>
                         @endforelse
                     </ul>
 
