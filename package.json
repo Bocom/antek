@@ -23,5 +23,8 @@
         "peerDependencyRules": {
             "ignoreMissing": ["prop-types"]
         }
+    },
+    "volta": {
+        "node": "16.18.0"
     }
 }
