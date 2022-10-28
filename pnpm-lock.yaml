@@ -1,6 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@fontsource/fira-code': ^4.5.12
+  '@fontsource/nunito': ^4.5.11
   '@tailwindcss/forms': ^0.5.3
   '@yaireo/tagify': ^4.16.4
   alpinejs: ^3.4.2
@@ -12,6 +14,8 @@ specifiers:
   vite: ^3.0.0
 
 dependencies:
+  '@fontsource/fira-code': 4.5.12
+  '@fontsource/nunito': 4.5.11
   '@yaireo/tagify': 4.16.4
   alpinejs: 3.10.3
   lodash-es: 4.17.21
@@ -21,7 +25,7 @@ devDependencies:
   autoprefixer: 10.4.12_postcss@8.4.17
   laravel-vite-plugin: 0.6.1_vite@3.1.6
   postcss: 8.4.17
-  tailwindcss: 3.1.8_postcss@8.4.17
+  tailwindcss: 3.1.8
   vite: 3.1.6
 
 packages:
@@ -43,6 +47,14 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@fontsource/fira-code/4.5.12:
+    resolution: {integrity: sha512-dAVGsgiVR6jslpuXosHH4/Jf8bsAIKL1RWqjVq4WpmxL7CFHfg9hT5bAv/Y3xsEj8kDTibEgpuC3eMfr9kb02g==}
+    dev: false
+
+  /@fontsource/nunito/4.5.11:
+    resolution: {integrity: sha512-j2WIvzsI+6wjbJ/gQjyHJL/SYZxyg1qomvRswMZAWj2lvv+eX4kzJOSbr9YhZLYywoMspYb0643EO4cHRy6zpQ==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -71,7 +83,7 @@ packages:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.1.8_postcss@8.4.17
+      tailwindcss: 3.1.8
     dev: true
 
   /@vue/reactivity/3.1.5:
@@ -746,12 +758,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.1.8_postcss@8.4.17:
+  /tailwindcss/3.1.8:
     resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
     engines: {node: '>=12.13.0'}
     hasBin: true
-    peerDependencies:
-      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
