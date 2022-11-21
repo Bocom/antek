@@ -54,14 +54,32 @@
             @foreach ($snippet->files as $file)
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-8 last:mb-0 dark:bg-gray-800">
                     <div class="p-6 border-b border-gray-200">
-                        <div class="flex items-center gap-x-2 mb-4">
+                        <div class="flex items-center gap-x-2 mb-4 last:mb-0">
                             <h3 class="font-bold text-2xl text-black dark:text-gray-300">{{ $file->filename }}</h3>
 
-                            <button class="hover:bg-slate-100 p-1 rounded dark:text-gray-200 dark:hover:bg-slate-700"><x-icons.clipboard-document class="w-6 h-6" /></button>
+                            {{-- <button
+                                class="hover:bg-slate-100 p-1 rounded dark:text-gray-200 dark:hover:bg-slate-700"
+                            >
+                                <x-icons.clipboard-document class="w-6 h-6" />
+                            </button> --}}
+
+                            <a
+                                href="{{ route('snippets.download_file', ['file' => $file->id]) }}"
+                                target="_blank"
+                                class="hover:bg-slate-100 p-1 rounded dark:text-gray-200 dark:hover:bg-slate-700"
+                                title="{{ __('Download :filename', ['filename' => $file->filename]) }}"
+                            >
+                                <x-icons.arrow-down-tray class="w-6 h-6" />
+                            </a>
                         </div>
 
-                        <x-file-toolbar :raw="route('snippets.raw-file', ['file' => $file->id])" />
-                        <x-snippet-content :content="$file->type === 'text' ? $file->content : $file->codeBlock()" />
+                        {{-- <x-file-toolbar :raw="route('snippets.raw_file', ['file' => $file->id])" /> --}}
+                        @if ($file->type !== 'attachment')
+                            <x-snippet-content
+                                :type="$file->type"
+                                :content="$file->type === 'code' ? $file->codeBlock() : $file->content"
+                            />
+                        @endif
                     </div>
                 </div>
             @endforeach

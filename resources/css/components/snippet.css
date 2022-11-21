@@ -1,5 +1,9 @@
-.snippet__content {
+.snippet-content {
     @apply text-black dark:text-gray-300;
+
+    &.snippet-content--attachment {
+        @apply max-h-64 overflow-y-auto;
+    }
 
     h2,
     h3 {
@@ -47,7 +51,7 @@
         @apply rounded bg-white dark:bg-gray-700;
     }
 
-    .snippet-file__toolbar + .snippet__content > pre {
+    .snippet-file__toolbar + .snippet-content > pre {
         @apply rounded-t-none;
     }
 

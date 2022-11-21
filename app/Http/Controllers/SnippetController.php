@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\SnippetFileType;
 use App\Http\Requests\StoreSnippetRequest;
 use App\Http\Requests\UpdateSnippetRequest;
 use App\Models\Snippet;
@@ -53,7 +54,7 @@ class SnippetController extends Controller
     {
         $perPage = $request->input('limit', 10);
 
-        $snippets = $snippets->simplePaginate($perPage);
+        $snippets = $snippets->with('tags')->simplePaginate($perPage);
         $snippets->appends(['limit' => $perPage]);
 
         return $snippets;
@@ -142,6 +143,13 @@ class SnippetController extends Controller
                 'Content-Type' => 'text/plain',
             ],
         );
+    }
+
+    public function downloadFile(SnippetFile $file)
+    {
+        return response()->streamDownload(function () use ($file) {
+            echo $file->content;
+        }, $file->filename);
     }
 
     /**

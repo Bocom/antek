@@ -45,8 +45,9 @@
                             x-model="file.type"
                             @change="(e) => file.type === 'text' ? (file.syntax = null) : null"
                         >
-                            <option value="text">{{ __('Text') }}</option>
-                            <option value="code">{{ __('Code') }}</option>
+                            @foreach (SnippetFileType::cases() as $fileType)
+                                <option value="{{ $fileType->value }}">{{ __($fileType->name) }}</option>
+                            @endforeach
                         </select>
                     </div>
 

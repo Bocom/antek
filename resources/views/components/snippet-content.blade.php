@@ -1,6 +1,6 @@
-@props(['content', 'dark' => false])
+@props(['content', 'type' => 'text'])
 
-<x-markdown class="snippet__content">
+<x-markdown class="snippet-content snippet-content--{{ $type }}">
     {!! $content !!}
 </x-markdown>
 

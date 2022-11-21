@@ -39,7 +39,8 @@ Route::prefix('snippets')
         Route::get('favorites', 'favorites')->name('snippets.favorites');
         Route::get('author/{author}', 'author')->name('snippets.author');
         Route::get('tag/{tag:name}', 'tag')->name('snippets.tag');
-        Route::get('file/{file}', 'rawFile')->name('snippets.raw-file');
+        Route::get('file/{file}/raw', 'rawFile')->name('snippets.raw_file');
+        Route::get('file/{file}/download', 'downloadFile')->name('snippets.download_file');
         Route::get('{snippet}/raw', 'raw')->name('snippets.raw');
     });
 
